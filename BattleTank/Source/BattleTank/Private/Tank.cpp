@@ -46,6 +46,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::AimAt(FVector HitLocation)
 {
+	auto Name = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s"), *Name, *HitLocation.ToString());
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
@@ -54,7 +56,7 @@ void ATank::Fire()
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireFrame) > ReloadTimeInSeconds;
 	if (Barrel && isReloaded)
 	{
-		// Spawn projectil at "Projectile"  socket of the barrel
+		// Spawn projectile at "Projectile"  socket of the barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
