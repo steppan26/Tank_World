@@ -4,6 +4,7 @@
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "Tank.h"
 
 
@@ -14,8 +15,8 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	// no need to protect pointers as added at construction
-
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 
 }
 
@@ -29,6 +30,7 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
+
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
