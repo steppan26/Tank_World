@@ -3,7 +3,6 @@
 #include "BattleTank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankAimingComponent.h"
 #include "Tank.h"
 
 
@@ -20,20 +19,13 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
 	if (!ensure(Barrel)) { return; }
 
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireFrame) > ReloadTimeInSeconds;
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	if (isReloaded)
 	{
 		// Spawn projectile at "Projectile"  socket of the barrel
@@ -44,6 +36,6 @@ void ATank::Fire()
 			);
 
 		Projectile->LaunchProjectile(LaunchSpeed);
-		LastFireFrame = FPlatformTime::Seconds();
+		LastFireTime = FPlatformTime::Seconds();
 	}
 }
