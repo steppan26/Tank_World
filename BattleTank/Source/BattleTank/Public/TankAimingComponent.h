@@ -10,7 +10,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	Empty
 };
 
 // forward declaration
@@ -40,6 +41,10 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	EFiringState FiringState = EFiringState::Reloading;
+
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Firing")
+	float AmmoCount = 3;
 
 private:
 	// Sets default values for this component's properties

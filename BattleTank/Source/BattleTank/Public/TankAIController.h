@@ -23,7 +23,7 @@ private:
 protected:
 	// How close can the AI tank get
 	UPROPERTY(EditAnywhere, Category = "Setup") // TODO Consider EditDefaultsOnly
-	float AcceptanceRadius = 3000;
+	float AcceptanceRadius = 6500;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	bool CanFire = true;
